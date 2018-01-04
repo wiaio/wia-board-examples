@@ -48,7 +48,7 @@ void loop() {
         // set content-type to json
         http.addHeader("Content-Type", "application/json");
 
-        // start connection and send HTTP headers. replace latitude and longitude with your gps coordinates
+        // start connection and send HTTP headers. replace name and data values with your own.
         int httpCode = http.POST("{\"name\":\"temperature\",\"data\":21.5}");
 
         // httpCode will be negative on error
