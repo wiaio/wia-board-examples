@@ -1,5 +1,5 @@
 /**
- * PublishEvent.ino
+ * PublishLocation.ino
  *
  *  Created on: 09.01.2017
  *
@@ -16,40 +16,34 @@
 
 ESP8266WiFiMulti WiFiMulti;
 
+const char* ssid     = "your-ssid";
+const char* password = "your-password";
+
+// get this from the wia dashboard. it should start with `d_sk`
+const char* device_secret_key = "your-device-secret-key";
+
 void setup() {
-
     USE_SERIAL.begin(115200);
-   // USE_SERIAL.setDebugOutput(true);
+    //USE_SERIAL.setDebugOutput(true);
 
-    USE_SERIAL.println();
-    USE_SERIAL.println();
-    USE_SERIAL.println();
-
-    for(uint8_t t = 4; t > 0; t--) {
-        USE_SERIAL.printf("[SETUP] WAIT %d...\n", t);
-        USE_SERIAL.flush();
-        delay(1000);
-    }
-
-    WiFiMulti.addAP("SSID", "PASSWORD");
-
+    WiFi.mode(WIFI_STA);
+    WiFiMulti.addAP(ssid, password);
 }
 
 void loop() {
     // wait for WiFi connection
     if((WiFiMulti.run() == WL_CONNECTED)) {
-
         HTTPClient http;
 
         USE_SERIAL.print("[HTTP] begin...\n");
 
         // configure wia rest api
-        http.begin("http://api.wia.io/v1/events");
+        http.begin("http://api.wia.io/v1/locations");
 
         USE_SERIAL.print("[HTTP] POST...\n");
 
-        // set authorization token. replace 'd_sk_abcdef123' with your device access token
-        http.addHeader("Authorization", "Bearer d_sk_abcdef123");
+        // set authorization token
+        http.addHeader("Authorization", "Bearer " + String(device_secret_key));
 
         // set content-type to json
         http.addHeader("Content-Type", "application/json");
