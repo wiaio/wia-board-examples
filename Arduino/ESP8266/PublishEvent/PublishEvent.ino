@@ -38,7 +38,7 @@ void loop() {
         USE_SERIAL.print("[HTTP] begin...\n");
 
         // configure wia rest api
-        http.begin("http://api.wia.io/v1/locations");
+        http.begin("http://api.wia.io/v1/events");
 
         USE_SERIAL.print("[HTTP] POST...\n");
 
