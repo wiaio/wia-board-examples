@@ -57,10 +57,12 @@ def post_event(name, data):
 # Run this loop continuously
 while True:
     light = l.light()
-    temperature = t.temperature()
+    # temperature = t.temperature()
+    # humidity = t.humidity()
+    # pressure = p.pressure()
 
     post_event("light", light[0])
-    # post_event("humidity", t.humidity())
-    post_event("temperature", temperature)
-    # post_event("pressure", p.pressure())
+    # post_event("temperature", temperature)
+    # post_event("humidity", humidity)
+    # post_event("pressure", pressure)
     time.sleep(DELAY)
