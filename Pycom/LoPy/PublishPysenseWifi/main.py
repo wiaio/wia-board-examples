@@ -31,8 +31,8 @@ for net in nets:
     if net.ssid == WIFI_SSID:
         print('Network found!')
         wlan.connect(net.ssid, auth=(net.sec, WIFI_KEY), timeout=5000)
-        while not wlan.isconnected():
-            machine.idle() # save power while waiting
+        # while not wlan.isconnected():
+        #     machine.idle() # save power while waiting
         print('WLAN connection succeeded!')
         break
 
